@@ -25,6 +25,36 @@ paths:
                 $ref: '#/components/schemas/UserResponse'
         '400':
           description: Invalid input
+    get:
+      summary: Search for users
+      operationId: searchUsers
+      parameters:
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: phone
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Users found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Invalid search parameters
   /users/{userId}:
     get:
       summary: Get user details
@@ -87,6 +117,7 @@ components:
       required:
         - email
         - name
+        - phone
       properties:
         email:
           type: string
